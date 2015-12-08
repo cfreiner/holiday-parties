@@ -16,11 +16,11 @@
     "url": "https://github.com/cfreiner/holiday-parties/issues"
   },
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "~1.14.1",
     "express": "~4.13.3",
-    "jsonwebtoken": "~5.4.1",
     "express-jwt": "~3.3.0",
-    "bcrypt": "~0.8.5",
+    "jsonwebtoken": "~5.4.1",
     "mongoose": "~4.2.9"
   }
 }

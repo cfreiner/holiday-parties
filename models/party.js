@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var PartySchema = mongoose.Schema({
   date: Date,
-  users: [Schema.Types.ObjectId],
+  users: [mongoose.Schema.Types.ObjectId],
   holiday:  String,
   needs: [String]
 });
