@@ -1,4 +1,4 @@
-var app = angular.module('HolidayApp', ['ngRoute', 'PartyCtrl', 'PartyServices']); // holidayServices
+var app = angular.module('HolidayApp', ['ngRoute', 'PartyCtrl', 'PartyServices', 'ui.bootstrap']); // holidayServices
 
 
 // var app = angular.module('AirplaneApp', ['ngRoute', "AirplaneCtrl", "AirplaneServices"]);
@@ -27,7 +27,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
  	.when('/signup', {
     templateUrl: 'app/views/signup.html',
     controller: 'SignupCtrl'
-  })    
+  })
 	.otherwise({
 		templateUrl: 'app/views/404.html'
 	})

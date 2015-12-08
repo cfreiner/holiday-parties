@@ -1,5 +1,5 @@
 angular.module('PartyCtrl', ['PartyServices'])
-.controller('HomeCtrl', ['$scope', 'Party', 'Giphy', 'Auth', function($scope, Party, Giphy, Auth) {
+.controller('HomeCtrl', ['$scope', 'Party', 'Auth', function($scope, Party, Auth) {
  $scope.parties = [];
  $scope.search = '';
  $scope.userName = Auth.getName();
@@ -28,14 +28,14 @@ angular.module('PartyCtrl', ['PartyServices'])
    console.log(data);
  });
 }])
-.controller('NewCtrl', ['$scope', '$location', 'Party', 'User', 'ui.bootstrap', function($scope, $location, Party, User) {
+.controller('NewCtrl', ['$scope', '$location', 'Party', 'User', 'Auth', 'Giphy', function($scope, $location, Party, User, Auth, Giphy) {
  $scope.party = {
    date: new Date(),
    users: [],
    holiday: '',
    needs: [],
    name: '',
-   creator: '',
+   creator: Auth.getId(),
    image: ''
  };
 
@@ -47,19 +47,37 @@ angular.module('PartyCtrl', ['PartyServices'])
    console.log(data);
  });
 
+  $scope.addGuest = function() {
+    if($scope.party.users.indexOf($scope.selected) === -1) {
+      $scope.party.users.push($scope.selected);
+    }
+  };
+
+  $scope.removeGuest = function(id) {
+    $scope.party.users.splice(id, 1);
+  };
+
+  $scope.addNeed = function() {
+    if($scope.party.needs.indexOf($scope.need) === -1) {
+      $scope.party.needs.push($scope.need);
+    }
+  };
+
+  $scope.removeNeed = function(id) {
+    $scope.party.needs.splice(id, 1);
+  };
+
  $scope.createParty = function() {
-   Party.save($scope.party, function success(data) {
-     Giphy.get({query: $scope.party.holiday},function (data){
-         console.log("Good", data.images.original.url);
-         $scope.party.image = data.images.original.url;
-       }, function error(data) {
-         console.log(data);
-       });
-     $location.path('/');
-   }, function error(data) {
-     console.log(data);
-   });
- }
+    Giphy.get({query: $scope.party.holiday},function (data){
+        console.log("Good", data.images.original.url);
+        $scope.party.image = data.images.original.url;
+        Party.save($scope.party, function success(data) {
+          $location.path('/');
+        }, function error(data) {
+            console.log(data);
+        });
+    });
+  };
 }])
 .controller('NavCtrl', ['$scope', 'Auth', '$location', function($scope, Auth, $location) {
  $scope.logout = function() {
