@@ -10,7 +10,7 @@ var secret = "mysupersecretpassword";
 
 var moongoose = require('mongoose');
 var Party = require('./models/party');
-moongoose.connect('mongodb://localhost/parties');
+moongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/parties');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
