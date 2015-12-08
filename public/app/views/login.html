@@ -1,1 +1,12 @@
-<p>login</p>
+<form ng-submit="userAction()">
+  <legend>{{actionName}}</legend>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" id="email" class="form-control" ng-model="user.email">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="Password" id="password" class="form-control" ng-model="user.password">
+  </div>
+  <button type="submit" class="btn btn-primary">{{actionName}}</button>
+</form>
