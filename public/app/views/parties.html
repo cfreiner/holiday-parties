@@ -4,9 +4,12 @@
 <div class="well" ng-repeat = 'party in parties track by $index'>
 	<h3>{{party.name}}</h3>
 	<p>{{party.date}}</p>
+	<img ng-src="{{party.image}}" class="img-responsive" alt="Image">
+	<h4>Needs:</h4>
 	<ul>
 		<li ng-repeat='item in party.needs'>{{item}}</li>
 	</ul>
+	<h4>Guests:</h4>
 	<ul>
 		<li ng-repeat = 'user in party.users'>{{user}}</li>
 	</ul>
