@@ -17,10 +17,20 @@ angular.module('PartyCtrl', ['PartyServices'])
    }, function error(data) {
      console.log(data);
    });
- }
+ };
 }])
-.controller('ShowCtrl', ['$scope', '$routeParams', 'Party', function($scope, $routeParams, Party) {
+.controller('ShowCtrl', ['$scope', '$location','$routeParams', 'Party', function($scope, $location,$routeParams, Party) {
  $scope.parties = {};
+
+ $scope.removeParty = function() {
+  Party.remove({id: $routeParams.id}, function success(data) {
+    $location.path('/');
+  }, function error(data) {
+    console.log(data);
+  });
+ }
+
+
 
  Party.get({id: $routeParams.id}, function success(data) {
    $scope.party = data;
