@@ -33,9 +33,10 @@
   </div>
   <div class="form-group">
     <label>Guest</label>
-    <input type="text" ng-model="guest" ng-click="addGuest()">
+    <input type="text" ng-model="guest">
+    <button class="btn btn-primary" ng-click="addGuest()">Add Guest</button>
   </div>
-  <div class="well" ng-repeat="guest in party.users">
+  <div class="well" ng-repeat="guest in users">
     {{guest}}
   </div>
   <button type="submit" class="btn btn-primary">{{actionName}}</button>
