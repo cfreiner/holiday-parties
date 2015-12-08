@@ -4,6 +4,7 @@
 <div class="well" ng-repeat = 'party in parties track by $index'>
 	<h3>{{party.name}}</h3>
 	<p>{{party.date}}</p>
+	<p> this is a <strong>{{party.holiday}}</strong> party!</p>
 	<img ng-src="{{party.image}}" class="img-responsive" alt="Image">
 	<h4>Needs:</h4>
 	<ul>
