@@ -1,106 +1,108 @@
 angular.module('PartyCtrl', ['PartyServices'])
-.controller('HomeCtrl', ['$scope', 'Party', 'Giphy', function($scope, Party, Giphy) {
-  $scope.parties = [];
-  $scope.search = '';
+.controller('HomeCtrl', ['$scope', 'Party', 'Giphy', 'Auth', function($scope, Party, Giphy, Auth) {
+ $scope.parties = [];
+ $scope.search = '';
+ $scope.userName = Auth.getName();
+ $scope.userId= Auth.getId();
 
-  Party.query(function success(data) {
-    $scope.parties = data;
-  }, function error(data) {
-    console.log(data)
-  });
+ Party.query(function success(data) {
+   $scope.parties = data;
+ }, function error(data) {
+   console.log(data)
+ });
 
-  $scope.deleteParty = function(id, partiesIdx) {
-    Party.delete({id: id}, function success(data) {
-      $scope.parties.splice(partiesIdx, 1);
-    }, function error(data) {
-      console.log(data);
-    });
-  }
+ $scope.deleteParty = function(id, partiesIdx) {
+   Party.delete({id: id}, function success(data) {
+     $scope.parties.splice(partiesIdx, 1);
+   }, function error(data) {
+     console.log(data);
+   });
+ }
 }])
 .controller('ShowCtrl', ['$scope', '$routeParams', 'Party', function($scope, $routeParams, Party) {
-  $scope.parties = {};
+ $scope.parties = {};
 
-  Party.get({id: $routeParams.id}, function success(data) {
-    $scope.party = data;
-  }, function error(data) {
-    console.log(data);
-  });
+ Party.get({id: $routeParams.id}, function success(data) {
+   $scope.party = data;
+ }, function error(data) {
+   console.log(data);
+ });
 }])
 .controller('NewCtrl', ['$scope', '$location', 'Party', 'User', 'ui.bootstrap', function($scope, $location, Party, User) {
-  $scope.party = {
-    date: new Date(),
-    users: [],
-    holiday: '',
-    needs: [],
-    name: '',
-    creator: '',
-    image: ''
-  };
+ $scope.party = {
+   date: new Date(),
+   users: [],
+   holiday: '',
+   needs: [],
+   name: '',
+   creator: '',
+   image: ''
+ };
 
-  $scope.users = [];
+ $scope.users = [];
 
-  User.query(function success(data) {
-    $scope.users = data;
-  }, function error(data) {
-    console.log(data);
-  });
+ User.query(function success(data) {
+   $scope.users = data;
+ }, function error(data) {
+   console.log(data);
+ });
 
-  $scope.createParty = function() {
-    Party.save($scope.party, function success(data) {
-      Giphy.get({query: $scope.party.holiday},function (data){
-          console.log("Good", data.images.original.url);
-          $scope.party.image = data.images.original.url;
-        }, function error(data) {
-          console.log(data);
-        });
-      $location.path('/');
-    }, function error(data) {
-      console.log(data);
-    });
-  }
+ $scope.createParty = function() {
+   Party.save($scope.party, function success(data) {
+     Giphy.get({query: $scope.party.holiday},function (data){
+         console.log("Good", data.images.original.url);
+         $scope.party.image = data.images.original.url;
+       }, function error(data) {
+         console.log(data);
+       });
+     $location.path('/');
+   }, function error(data) {
+     console.log(data);
+   });
+ }
 }])
 .controller('NavCtrl', ['$scope', 'Auth', '$location', function($scope, Auth, $location) {
-  $scope.logout = function() {
-    Auth.removeToken();
-  };
+ $scope.logout = function() {
+   Auth.removeToken();
+ };
 
 }])
 .controller("LoginCtrl", ['$scope', '$http', '$location', 'Auth', function($scope, $http, $location, Auth) {
-  $scope.user = {
-    email: "",
-    password: ""
-  };
+ $scope.user = {
+   email: "",
+   password: ""
+ };
 
-  $scope.actionName = "Login";
+ $scope.actionName = "Login";
 
-  $scope.userAction = function() {
-    $http.post("/api/auth", $scope.user).then(function(res) {
-      Auth.saveToken(res.data.token);
-      $location.path("/");
-    }, function(res) {
-      console.log(res.data);
-    });
-  }
+ $scope.userAction = function() {
+   $http.post("/api/auth", $scope.user).then(function(res) {
+     Auth.saveToken(res.data);
+     $location.path("/");
+   }, function(res) {
+     console.log(res.data);
+   });
+ }
 
 }])
 .controller("SignupCtrl", ['$scope', '$http', '$location', 'Auth', function($scope, $http, $location, Auth) {
-   $scope.user = {
-    email: "",
-    password: ""
-  };
+  $scope.user = {
+   email: "",
+   password: ""
+ };
 
-  $scope.actionName = "Signup";
+ $scope.actionName = "Signup";
 
-  $scope.userAction = function() {
-    $http.post("/api/users", $scope.user).then(function(res) {
-      $http.post("/api/auth", $scope.user).then(function(res){
-        Auth.saveToken(res.data.token);
-        $location.path("/");
-      }, function(res) {
-        console.log(res.data);
-      });
+ $scope.userAction = function() {
+   $http.post("/api/users", $scope.user).then(function(res) {
+     $http.post("/api/auth", $scope.user).then(function(res){
+       Auth.saveToken(res.data);
+       $location.path("/");
      }, function(res) {
-        console.log(res.data);
-    });
-   }
+       console.log(res.data);
+     });
+    }, function(res) {
+       console.log(res.data);
+   });
+  }
 }]);
