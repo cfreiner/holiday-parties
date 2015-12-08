@@ -10,7 +10,7 @@ var secret = "mysupersecretpassword";
 
 var moongoose = require('mongoose');
 var Party = require('./models/party');
-moongoose.connect('mongodb://localhost/parties');
+moongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/parties');
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
@@ -46,4 +46,4 @@ app.get('/*', function(req, res) {
 	res.sendFile(path.join(__dirname, 'public/index.html'));
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
