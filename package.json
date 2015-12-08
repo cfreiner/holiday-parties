@@ -1,0 +1,26 @@
+{
+  "name": "holiday-parties",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cfreiner/holiday-parties.git"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/cfreiner/holiday-parties/issues"
+  },
+  "dependencies": {
+    "body-parser": "~1.14.1",
+    "express": "~4.13.3",
+    "jsonwebtoken": "~5.4.1",
+    "express-jwt": "~3.3.0",
+    "bcrypt": "~0.8.5",
+    "mongoose": "~4.2.9"
+  }
+}
