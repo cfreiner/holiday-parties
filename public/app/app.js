@@ -41,4 +41,5 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $rootScope.isLoggedIn = function() {
     return Auth.isLoggedIn.apply(Auth);
   }
+  $rootScope.userName = name;
 }]);

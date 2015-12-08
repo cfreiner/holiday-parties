@@ -1,5 +1,5 @@
 angular.module('PartyCtrl', ['PartyServices'])
-.controller('HomeCtrl', ['$scope', 'Party', function($scope, Party) {
+.controller('HomeCtrl', ['$scope', 'Party', 'Giphy', function($scope, Party, Giphy) {
   $scope.parties = [];
   $scope.search = '';
 
@@ -8,7 +8,7 @@ angular.module('PartyCtrl', ['PartyServices'])
   }, function error(data) {
     console.log(data)
   });
-
+  
   $scope.deleteParty = function(id, partiesIdx) {
     Party.delete({id: id}, function success(data) {
       $scope.parties.splice(partiesIdx, 1);
@@ -28,13 +28,26 @@ angular.module('PartyCtrl', ['PartyServices'])
 }])
 .controller('NewCtrl', ['$scope', '$location', 'Party', function($scope, $location, Party) {
   $scope.party = {
-    manufacturer: '',
-    model: '',
-    engines: null
+    date: new Date(),
+    users: [],
+    holiday: '',
+    needs: [],
+    name: '',
+    creator: '',
+    image: ''
   };
 
   $scope.createParty = function() {
+
     Party.save($scope.party, function success(data) {
+
+      Giphy.get({query: $scope.party.holiday},function (data){
+          console.log("Good", data.images.original.url)
+          $scope.party.image = data.images.original.url;
+        }, function error(data) {
+          console.log(data)
+        });
+
       $location.path('/');
     }, function error(data) {
       console.log(data);

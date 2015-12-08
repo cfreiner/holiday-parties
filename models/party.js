@@ -6,7 +6,8 @@ var PartySchema = mongoose.Schema({
   holiday:  String,
   needs: [String], 
   name: String, 
-  creator: mongoose.Schema.Types.ObjectId
+  creator: mongoose.Schema.Types.ObjectId,
+  image: String
 });
 
 

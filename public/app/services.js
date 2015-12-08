@@ -5,13 +5,24 @@ angular.module('PartyServices', ['ngResource'])
 .factory('Auth', ['$window', function($window) {
    return {
      saveToken: function(token) {
-       $window.localStorage['party-token'] = token;
+       $window.localStorage['party-token'] = token.token;
+       $window.localStorage['user-name'] = token.user.name;
+       $window.localStorage['user-id'] = token.user._id;
      },
      getToken: function() {
        return $window.localStorage['party-token'];
      },
+     getName: function() {
+       return $window.localStorage['user-name'];
+     },
+     getId: function() {
+       return $window.localStorage['user-id'];
+     },
      removeToken: function() {
        $window.localStorage.removeItem('party-token');
+       $window.localStorage.removeItem('user-name');
+       $window.localStorage.removeItem('user-id');
+
      },
      isLoggedIn: function() {
        var token = this.getToken();
@@ -29,7 +40,7 @@ angular.module('PartyServices', ['ngResource'])
        return config;
      }
    };
+ }])
+ .factory('Giphy', ['$resource', function($resource){
+     return $resource('/giphy/:query');
  }]);
- // .factory('GiphyService', ['ngResource', function($ngResource){
- // 	return $resource('http://api.giphy.com/v1/gifs/search?q=funny+cat', {api_key: 'dc6zaTOxFJmzC'})
- // }]);

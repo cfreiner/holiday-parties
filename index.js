@@ -28,6 +28,7 @@ app.use(function (err, req, res, next) {
 
 app.use('/api/parties', require('./controllers/parties'));
 app.use('/api/users', require('./controllers/users'));
+app.use('/giphy', require('./controllers/giphy'));
 
 app.post('/api/auth', function(req, res) {
   User.findOne({email: req.body.email}, function(err, user) {
