@@ -8,7 +8,7 @@ angular.module('PartyCtrl', ['PartyServices'])
   }, function error(data) {
     console.log(data)
   });
-  
+
   $scope.deleteParty = function(id, partiesIdx) {
     Party.delete({id: id}, function success(data) {
       $scope.parties.splice(partiesIdx, 1);
@@ -26,7 +26,7 @@ angular.module('PartyCtrl', ['PartyServices'])
     console.log(data);
   });
 }])
-.controller('NewCtrl', ['$scope', '$location', 'Party', function($scope, $location, Party) {
+.controller('NewCtrl', ['$scope', '$location', 'Party', 'User', function($scope, $location, Party, User) {
   $scope.party = {
     date: new Date(),
     users: [],
@@ -37,17 +37,22 @@ angular.module('PartyCtrl', ['PartyServices'])
     image: ''
   };
 
+  $scope.users = [];
+
+  User.query(function success(data) {
+    $scope.users = data;
+  }, function error(data) {
+    console.log(data);
+  });
+
   $scope.createParty = function() {
-
     Party.save($scope.party, function success(data) {
-
       Giphy.get({query: $scope.party.holiday},function (data){
-          console.log("Good", data.images.original.url)
+          console.log("Good", data.images.original.url);
           $scope.party.image = data.images.original.url;
         }, function error(data) {
-          console.log(data)
+          console.log(data);
         });
-
       $location.path('/');
     }, function error(data) {
       console.log(data);
@@ -59,7 +64,7 @@ angular.module('PartyCtrl', ['PartyServices'])
     Auth.removeToken();
   };
 
-}])  
+}])
 .controller("LoginCtrl", ['$scope', '$http', '$location', 'Auth', function($scope, $http, $location, Auth) {
   $scope.user = {
     email: "",
@@ -92,7 +97,7 @@ angular.module('PartyCtrl', ['PartyServices'])
         Auth.saveToken(res.data.token);
         $location.path("/");
       }, function(res) {
-        console.log(res.data);  
+        console.log(res.data);
       });
      }, function(res) {
         console.log(res.data);

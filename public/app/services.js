@@ -43,4 +43,7 @@ angular.module('PartyServices', ['ngResource'])
  }])
  .factory('Giphy', ['$resource', function($resource){
      return $resource('/giphy/:query');
+ }])
+ .factory('User', ['$resource', function($resource) {
+    return $resource('/api/users');
  }]);
