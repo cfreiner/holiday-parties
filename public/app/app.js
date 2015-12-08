@@ -25,7 +25,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controller: 'LoginCtrl'
  	})
  	.when('/signup', {
-    templateUrl: 'app/views/login.html',
+    templateUrl: 'app/views/signup.html',
     controller: 'SignupCtrl'
   })    
 	.otherwise({

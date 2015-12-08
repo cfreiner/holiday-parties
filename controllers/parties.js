@@ -16,7 +16,7 @@ router.route('/')
     });
   });
 
-router.route('/:id')
+router.route('/:id') 
   .get(function(req, res) {
     Party.findById(req.params.id, function(err, party) {
       if (err) return res.status(500).send(err);

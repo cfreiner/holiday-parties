@@ -1,1 +1,13 @@
-<p>allparties</p>
+<h1>{{Auth.getName()}}'s Parties!</h1>
+
+<!-- This will be filtered by user id -->
+<div class="well" ng-repeat = 'party in parties track by $index'>
+	<h3>{{party.name}}</h3>
+	<p>{{party.date}}</p>
+	<ul>
+		<li ng-repeat='item in party.needs'>{{item}}</li>
+	</ul>
+	<ul>
+		<li ng-repeat = 'user in party.users'>{{user}}</li>
+	</ul>
+</div>
