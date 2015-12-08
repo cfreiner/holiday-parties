@@ -2,7 +2,7 @@
 
 <!-- This will be filtered by user id -->
 <div class="well" ng-repeat = 'party in parties track by $index'>
-	<h3>{{party.name}}</h3>
+	<a ng-href='/parties/{{party._id}}'><h3>{{party.name}}</h3></a>
 	<p>{{party.date}}</p>
 	<p> this is a <strong>{{party.holiday}}</strong> party!</p>
 	<img ng-src="{{party.image}}" class="img-responsive" alt="Image">
