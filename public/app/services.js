@@ -7,7 +7,7 @@ angular.module('PartyServices', ['ngResource'])
      saveToken: function(token) {
        $window.localStorage['party-token'] = token.token;
        $window.localStorage['user-name'] = token.user.name;
-       $window.localStorage['user-id'] = token.user._id;
+       $window.localStorage['user-id'] = token.user.id;
      },
      getToken: function() {
        return $window.localStorage['party-token'];
@@ -20,6 +20,7 @@ angular.module('PartyServices', ['ngResource'])
      },
      removeToken: function() {
        $window.localStorage.removeItem('party-token');
+       console.log($window.localStorage['party-token'])
        $window.localStorage.removeItem('user-name');
        $window.localStorage.removeItem('user-id');
 
