@@ -1,9 +1,7 @@
 angular.module('PartyCtrl', ['PartyServices'])
-.controller('HomeCtrl', ['$scope', 'Party', 'Giphy', 'Auth', function($scope, Party, Giphy, Auth) {
+.controller('HomeCtrl', ['$scope', 'Party', 'Giphy', function($scope, Party, Giphy) {
   $scope.parties = [];
   $scope.search = '';
-  $scope.userName = Auth.getName();
-  $scope.userId= Auth.getId();
 
   Party.query(function success(data) {
     $scope.parties = data;
@@ -28,7 +26,7 @@ angular.module('PartyCtrl', ['PartyServices'])
     console.log(data);
   });
 }])
-.controller('NewCtrl', ['$scope', '$location', 'Party', 'User', function($scope, $location, Party, User) {
+.controller('NewCtrl', ['$scope', '$location', 'Party', 'User', 'ui.bootstrap', function($scope, $location, Party, User) {
   $scope.party = {
     date: new Date(),
     users: [],
@@ -77,7 +75,7 @@ angular.module('PartyCtrl', ['PartyServices'])
 
   $scope.userAction = function() {
     $http.post("/api/auth", $scope.user).then(function(res) {
-      Auth.saveToken(res.data);
+      Auth.saveToken(res.data.token);
       $location.path("/");
     }, function(res) {
       console.log(res.data);
@@ -96,7 +94,7 @@ angular.module('PartyCtrl', ['PartyServices'])
   $scope.userAction = function() {
     $http.post("/api/users", $scope.user).then(function(res) {
       $http.post("/api/auth", $scope.user).then(function(res){
-        Auth.saveToken(res.data);
+        Auth.saveToken(res.data.token);
         $location.path("/");
       }, function(res) {
         console.log(res.data);
