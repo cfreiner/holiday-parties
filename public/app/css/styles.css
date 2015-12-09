@@ -34,47 +34,52 @@
 	background-color: orange
 }
 
-.April {
+.April, .april {
+	background-color: salmon;
+}
+
+.St, .st {
+	background-color: limegreen;
+}
+
+.Labor, .labor {
+	background-color: black;
+	color: white;
+}
+
+.Flag, .flag {
+	background-color: lavender;
+}
+
+.Pi, .pi {
+	background-color: maroon;
+	color: white;
+}
+
+.Hannukah, .hannukah {
+	background-color: blue;
+}
+
+.Kwanzaa, .kwanzaa {
+	background-color: brown;
+	color: white;
+}
+
+.Veterans, .veterans {
+	background-color: aqua;
+}
+
+.Presidents, .presidents {
+	background-color: plum;
+	color: white;
+}
+
+.Martin, .martin {
+	background-color: sandybrown;
 
 }
 
-.St {
-
-}
-
-.Labor {
-
-}
-
-.Flag {
-
-}
-
-.Pi {
-
-}
-
-.Hannukah {
-
-}
-
-.Kwanzaa {
-
-}
-
-.Veterans {
-
-}
-
-.Presidents {
-
-}
-
-.Martin {
-
-}
-
-.Columbus {
-
+.Columbus, .columbus {
+	background-color: teal;
 }
 
