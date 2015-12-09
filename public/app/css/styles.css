@@ -2,35 +2,35 @@
 	border-radius: 0px;
 }
 
-.Birthday {
+.Birthday, .birthday {
 	font-family: 'Indie Flower', cursive;
 }
 
-.Christmas {
+.Christmas, .christmas {
 	font-family: 'Lobster', cursive;
 }
 
-.Halloween {
+.Halloween, .halloween {
 	font-family: 'Marck Script', cursive;
 }
 
-.New {
+.New, .new {
 	font-family: 'Pacifico', cursive;
 }
 
-.Thanksgiving {
+.Thanksgiving, .thanksgiving {
 	background-color: yellow;
 }
 
-.Easter {
+.Easter, .easter {
 	background-color: pink;
 }
 
-.Independence {
+.Independence, .independence {
 	background-color: red
 }
 
-.Black {
+.Black, .black {
 	background-color: orange
 }
 
